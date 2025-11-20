@@ -41,8 +41,17 @@ class Product(BaseModel):
 # Add your own schemas here:
 # --------------------------------------------------
 
-# Note: The Flames database viewer will automatically:
-# 1. Read these schemas from GET /schema endpoint
-# 2. Use them for document validation when creating/editing
-# 3. Handle all database operations (CRUD) directly
-# 4. You don't need to create any database endpoints!
+class Todo(BaseModel):
+    """
+    Todos collection schema
+    Collection name: "todo"
+    """
+    title: str = Field(..., min_length=1, max_length=200, description="Todo title or task name")
+    vibe: Optional[str] = Field(
+        None,
+        description="Optional vibe or category used when generating tasks (e.g., gym, study, reset)"
+    )
+    completed: bool = Field(False, description="Completion status")
+    priority: Optional[str] = Field(
+        None, description="Optional priority: low | medium | high"
+    )
